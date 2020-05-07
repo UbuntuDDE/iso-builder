@@ -4,7 +4,7 @@ This ISO builder is fork of the good work from the elementary crew.  Many thanks
 
 ## Building Locally
 
-As ubuntu cinnamon-remix is built with the Debian version of `live-build`, not the Ubuntu patched version, it's easiest to build an iso in a Debian VM or container. This prevents messing up your host system too.
+As Ubuntu DDE is built with the Debian version of `live-build`, not the Ubuntu patched version, it's easiest to build an iso in a Debian VM or container. This prevents messing up your host system too.
 
 The following example uses Docker and assumes you have Docker correctly installed and set up:
 
@@ -20,18 +20,24 @@ The following example uses Docker and assumes you have Docker correctly installe
     
     e.g. root@ea5126f14ac9:/#
 
-    Now install debootstrap package and create an eoan (or focal script)
+    Now install debootstrap package and create a focal (or groovy script)
 
     apt update && apt install debootstrap git nano -y
 
-    cd /usr/share/debootstrap/scripts; cp disco focal; cd ;
+    Make sure you check for the latest Ubuntu Release scripts-eoan or focal; currently at disco (run ls)
+    
+    cd /usr/share/debootstrap/scripts; cp disco (ver your building); cd ;
+    Substitute (ver your building) for as of May 7 2020:
+    focal -> 20.04 LTS
+    groovy -> 20.10
     
     Clone the iso-builder
 
-    mkdir /home/ubuntudde; cd /home/ubuntudde; git clone https://github.com/UbuntuDDE/iso-builder -b ubuntudde; cd iso-builder; ./build.sh
+    mkdir /home/ubuntudde; cd /home/ubuntudde; git clone https://github.com/UbuntuDDE/iso-builder -b ubuntudde; cd iso-builder; 
     
-at this point configure etc/terraform.conf for the build you wish to make e.g. 20.04 and focal - ensure you decide between unstable or all PPAs
+at this point configure etc/terraform.conf for the build you wish to make e.g. 20.04 and focal - ensure you decide between unstable or all PPAs (important step)
 
+When ready: ./build.sh
 
     This will eventually complete - ignore any errors EXCEPT for 404 repository errors.  If you get those then investigate why and once fixed exit and start the instructions again.  This step will take 20-60 minutes depending on your internet speed and host OS CPU power
 
